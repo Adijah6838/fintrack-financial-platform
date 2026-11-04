@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h2>Welcome back!</h2>
+        <button class="btn btn-primary" onclick="createAccount()">+ Create New Account</button>
+    </div>
+</div>
+
+<div class="row" id="accountsContainer">
+    <!-- Account cards will be injected here by JavaScript -->
+    <div class="col-12 text-center text-muted py-5" id="noAccountsMessage">
+        Loading accounts...
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-white">
+                <h4 class="mb-0">Make a Transaction</h4>
+            </div>
+            <div class="card-body">
+                <form id="transactionForm">
+                    <div class="mb-3">
+                        <label class="form-label">Transaction Type</label>
+                        <select class="form-select" id="txnType" onchange="updateFormFields()">
+                            <option value="DEPOSIT">Deposit</option>
+                            <option value="WITHDRAWAL">Withdraw</option>
+                            <option value="TRANSFER">Transfer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Amount ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="txnAmount" required min="0.01">
+                    </div>
+
+                    <div class="mb-3" id="sourceAccountDiv" style="display: none;">
+                        <label class="form-label">From Account</label>
+                        <select class="form-select" id="sourceAccount"></select>
+                    </div>
+
+                    <div class="mb-3" id="destAccountDiv">
+                        <label class="form-label">To Account (For Deposit/Transfer)</label>
+                        <select class="form-select" id="destAccount"></select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100" id="submitBtn">Submit Transaction</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/customer.js"></script>
+{% endblock %}
